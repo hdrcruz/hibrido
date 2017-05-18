@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { DocumentosService } from '../../providers/documentos-service';
 import * as pdfmake from 'pdfmake/build/pdfmake'
+import { HomePage } from '../home/home'
 
 /**
  * Generated class for the Drawpad page.
@@ -64,21 +65,269 @@ export class Drawpad {
     this.assinatura.image = this.imageData;
     this.signaturePad.clear();
     var pdf;
-    var dd = {content: [
-      {
-      image: this.signature,
-      width: 150,
-      height: 250,
-      }
-    ]};
+    var dd = {
+
+
+   header: {
+    columns: [
+      { text: 'HEADER LEFT', style: 'documentHeaderLeft' },
+      { text: 'HEADER CENTER', style: 'documentHeaderCenter' },
+      { text: 'HEADER RIGHT', style: 'documentHeaderRight' }
+    ]
+  },
+  footer: {
+    columns: [
+      { text: 'FOOTER LEFT', style: 'documentFooterLeft' },
+      { text: 'FOOTER CENTER', style: 'documentFooterCenter' },
+      { text: 'FOOTER RIGHT', style: 'documentFooterRight' }
+    ]
+  },
+	content: [
+	    // Header
+	    {
+	        columns: [
+	            
+	                
+	            [
+	                {
+	                    text: 'Recibo', 
+	                    style: 'invoiceTitle',
+	                    width: '*'
+	                },
+    	            {
+    	              stack: [
+    	                   {
+    	                       columns: [
+    	                            {
+    	                                text:'Recibo #', 
+    	                                style:'invoiceSubTitle',
+    	                                width: '*'
+    	                                
+    	                            }, 
+    	                            {
+    	                                text:'00001',
+    	                                style:'invoiceSubValue',
+    	                                width: 100
+    	                                
+    	                            }
+    	                            ]
+    	                   },
+    	                   {
+    	                       columns: [
+    	                           {
+    	                               text:'Data',
+    	                               style:'invoiceSubTitle',
+    	                               width: '*'
+    	                           }, 
+    	                           {
+    	                               text:'June 01, 2016',
+    	                               style:'invoiceSubValue',
+    	                               width: 100
+    	                           }
+    	                           ]
+    	                   },
+    	                   
+    	               ]
+    	            }
+	            ],
+	        ],
+	    },
+	    
+        // Line breaks
+	    '\n\n',
+	    // Items
+        
+	    // Signature
+	    {
+	        columns: [
+	            {
+	                text:'TEXTO DE RECEBIMENTO A SER DEFINIDO',
+	            },
+	            
+	            {
+	                
+	                
+	                
+	                stack: [
+	                    '\n\n\n\n\n\n\n\n',
+
+	                    {
+	                        image: this.signature,
+	                        width: 150,
+	                    },
+	                    { 
+	                        text: 'Your Name',
+	                        style:'signatureName'
+	                        
+	                    },
+	                    { 
+	                        text: 'Your job title',
+	                        style:'signatureJobTitle'
+	                        
+	                    },
+	                    ],
+	               width: 180
+	            },
+	        ]
+	    },
+        { 
+            text: 'NOTAS',
+            style:'notesTitle'
+        },
+        { 
+            text: 'TEXTO DE AVISO \n SEGUNDA LINHA',
+            style:'notesText'
+        }
+	],
+	styles: {
+	    // Document Header
+	    documentHeaderLeft: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'left'
+	    },
+	    documentHeaderCenter: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'center'
+	    },
+	    documentHeaderRight: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'right'
+	    },
+	    // Document Footer
+	    documentFooterLeft: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'left'
+	    },
+	    documentFooterCenter: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'center'
+	    },
+	    documentFooterRight: {
+	        fontSize: 10,
+	        margin: [5,5,5,5],
+	        alignment:'right'
+	    },
+	    // Invoice Title
+		invoiceTitle: {
+			fontSize: 22,
+			bold: true,
+			alignment:'right',
+			margin:[0,0,0,15]
+		},
+		// Invoice Details
+		invoiceSubTitle: {
+			fontSize: 12,
+			alignment:'right'
+		},
+		invoiceSubValue: {
+			fontSize: 12,
+			alignment:'right'
+		},
+		// Billing Headers
+		invoiceBillingTitle: {
+			fontSize: 14,
+			bold: true,
+			alignment:'left',
+			margin:[0,20,0,5],
+		},
+		// Billing Details
+		invoiceBillingDetails: {
+			alignment:'left'
+
+		},
+		invoiceBillingAddressTitle: {
+		    margin: [0,7,0,3],
+		    bold: true
+		},
+		invoiceBillingAddress: {
+		    
+		},
+		// Items Header
+		itemsHeader: {
+		    margin: [0,5,0,5],
+		    bold: true
+		},
+		// Item Title
+		itemTitle: {
+		    bold: true,
+		},
+		itemSubTitle: {
+            italics: true,
+            fontSize: 11
+		},
+		itemNumber: {
+		    margin: [0,5,0,5],
+		    alignment: 'center',
+		},
+		itemTotal: {
+		    margin: [0,5,0,5],
+		    bold: true,
+		    alignment: 'center',
+		},
+
+		// Items Footer (Subtotal, Total, Tax, etc)
+		itemsFooterSubTitle: {
+		    margin: [0,5,0,5],
+		    bold: true,
+		    alignment:'right',
+		},
+		itemsFooterSubValue: {
+		    margin: [0,5,0,5],
+		    bold: true,
+		    alignment:'center',
+		},
+		itemsFooterTotalTitle: {
+		    margin: [0,5,0,5],
+		    bold: true,
+		    alignment:'right',
+		},
+		itemsFooterTotalValue: {
+		    margin: [0,5,0,5],
+		    bold: true,
+		    alignment:'center',
+		},
+		signaturePlaceholder: {
+		    margin: [0,70,0,0],   
+		},
+		signatureName: {
+		    bold: true,
+		    alignment:'center',
+		},
+		signatureJobTitle: {
+		    italics: true,
+		    fontSize: 10,
+		    alignment:'center',
+		},
+		notesTitle: {
+		  fontSize: 10,
+		  bold: true,  
+		  margin: [0,50,0,3],
+		},
+		notesText: {
+		  fontSize: 10
+		},
+		center: {
+		    alignment:'center',
+		},
+	},
+	defaultStyle: {
+		columnGap: 20,
+	}
+};
     this.doc.entregue = true;
     pdfmake.createPdf(dd).getDataUrl(function (dataURL){
       pdf = dataURL;
       // this.doc.recibo = pdf;
-      console.log(this.doc.pdf);
+      // console.log(this.doc.pdf);
     });
-    // pdfmake.createPdf(dd).open();
-    this.documentosService.saveRec(this.doc);
+    pdfmake.createPdf(dd).open();
+    // this.documentosService.saveRec(this.doc);
+     this.navCtrl.setRoot(HomePage);
   }
 
  
