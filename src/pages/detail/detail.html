@@ -1,0 +1,45 @@
+<!--
+  Generated template for the Detail page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Doc {{ doc.numero}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+        <ion-card-content>
+            <ion-item-group>
+                <ion-item-divider color="light">
+                    <ion-icon ios="ios-document" md="md-document" item-left></ion-icon>
+                    Documento
+                </ion-item-divider>
+                <ion-item>Número: {{ doc.numero }}</ion-item>
+                <ion-item>Data: {{ doc.data }}</ion-item>
+            </ion-item-group>
+            <ion-item-group>
+                <ion-item-divider color="light">
+                    <ion-icon ios="ios-filing" md="md-filing" item-left></ion-icon>
+                    Descrição
+                </ion-item-divider>
+                <ion-item>
+                    <ion-label>
+                        <h2>Texto</h2>
+                        <h3>Texto</h3>
+                    </ion-label>
+                </ion-item>
+            </ion-item-group>
+        </ion-card-content>
+    </ion-card>
+
+
+
+  <button ion-button full (click)="signDoc()">Assinar</button>
+</ion-content>
