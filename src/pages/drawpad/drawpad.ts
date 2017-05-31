@@ -2,8 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { DocumentosService } from '../../providers/documentos-service';
-import * as pdfmake from 'pdfmake/build/pdfmake'
-import { HomePage } from '../home/home'
+import * as pdfmake from 'pdfmake/build/pdfmake';
+import { HomePage } from '../home/home';
+import { ReciboPage } from '../recibo-page/recibo-page';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+
 
 /**
  * Generated class for the Drawpad page.
@@ -32,8 +35,8 @@ export class Drawpad {
     'penColor': '#444444' //666a73
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private documentosService: DocumentosService, private platform: Platform) {
-    this.doc = this.navParams.get('doc');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private documentosService: DocumentosService, private platform: Platform, private screenOrientation: ScreenOrientation) {
+    this.doc = this.navParams.get('selectedDoc');
   }
 
   ionViewDidLoad() {
@@ -42,11 +45,12 @@ export class Drawpad {
 
   ionViewDidEnter() {
     this.signaturePad.clear()
-    
-    // this.signaturePad.set("canvasWidth", this.platform.width);
-    // console.log();
-    // this.signaturePad.set("canvasHeight", this.platform.height());
-    
+	if (this.platform.is('android')){
+		this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+		this.signaturePad.set("canvasWidth", this.platform.width());
+		this.signaturePad.set("canvasHeight", this.platform.height());	
+	}
+	    
   }
 
   drawComplete() {
@@ -153,15 +157,15 @@ export class Drawpad {
 
 	                    {
 	                        image: this.signature,
-	                        width: 150,
+							width: 200
 	                    },
 	                    { 
-	                        text: 'Your Name',
+	                        text: 'Nome',
 	                        style:'signatureName'
 	                        
 	                    },
 	                    { 
-	                        text: 'Your job title',
+	                        text: 'Titulo',
 	                        style:'signatureJobTitle'
 	                        
 	                    },
@@ -325,9 +329,10 @@ export class Drawpad {
       // this.doc.recibo = pdf;
       // console.log(this.doc.pdf);
     });
-    pdfmake.createPdf(dd).open();
+    // pdfmake.createPdf(dd).download();
     // this.documentosService.saveRec(this.doc);
-     this.navCtrl.setRoot(HomePage);
+    //  this.navCtrl.setRoot(HomePage);
+	this.navCtrl.push(ReciboPage , { signature: this.signature } );
   }
 
  
@@ -335,5 +340,6 @@ export class Drawpad {
   clearPad() {
     this.signaturePad.clear();
   }
+
 
 }

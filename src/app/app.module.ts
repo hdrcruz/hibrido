@@ -6,13 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CanvasDraw } from '../components/canvas-draw/canvas-draw';
 import { DocumentosService } from '../providers/documentos-service';
 import { HttpModule } from '@angular/http';
 import { Detail } from '../pages/detail/detail';
 import { Drawpad } from '../pages/drawpad/drawpad';
 import { SignaturePadModule } from 'angular2-signaturepad';
+import { ReciboPage } from '../pages/recibo-page/recibo-page'
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     Detail,
     Drawpad,
     CanvasDraw,
+    ReciboPage,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     HomePage,
     Detail,
     Drawpad,
+    ReciboPage,
   ],
   providers: [
     StatusBar,

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Assinaturas
+      Documentos
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -16,20 +16,11 @@
       </ion-refresher-content>
   </ion-refresher>
 
-<!--<div class="title">Histórico de Assinaturas</div>-->
-  <ion-list>
-    
-    <ion-item-sliding *ngFor="let doc of data" (click)="selectDoc(doc)">
-      
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="{{doc.image}}" imageViewer>
-        </ion-thumbnail>
-        <h2>{{ doc.numero}}</h2>           
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="danger" (click)="delAssinatura(doc)">Apagar</button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card *ngFor="let doc of data"   (click)="selectDoc(doc)"> 
+    <ion-item >
+      <ion-icon ios="ios-document" md="md-document" item-left large></ion-icon>
+      <h2>{{ doc.numero }}</h2>
+      <p>Breve resumo do documento?</p>
+    </ion-item>
+  </ion-card>
 </ion-content>

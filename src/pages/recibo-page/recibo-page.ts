@@ -1,33 +1,28 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Drawpad } from '../drawpad/drawpad'
 
 /**
- * Generated class for the Detail page.
+ * Generated class for the ReciboPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-detail',
-  templateUrl: 'detail.html',
+  selector: 'page-recibo-page',
+  templateUrl: 'recibo-page.html',
 })
-export class Detail {
+export class ReciboPage {
 
-  doc: any;
+  signature: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.doc = this.navParams.get('selectedDoc');
+    this.signature = this.navParams.get('signature');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Detail');
-  }
-
-  signDoc(){
-    this.navCtrl.push(Drawpad , { selectedDoc: this.doc } );
-
+    console.log('ionViewDidLoad ReciboPage');
+    console.log(this.signature);
   }
 
 }
